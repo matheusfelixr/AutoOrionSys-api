@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.exception;
+ackage com.autoorion.exception;
 
 import com.autoorion.dto.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;

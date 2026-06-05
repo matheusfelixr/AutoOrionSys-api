@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.entity;
+ackage com.autoorion.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

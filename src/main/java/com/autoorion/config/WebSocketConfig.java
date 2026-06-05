@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.config;
+package com.autoorion.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.config;
+package com.autoorion.config;
 
 import com.autoorion.entity.*;
 import com.autoorion.repository.*;

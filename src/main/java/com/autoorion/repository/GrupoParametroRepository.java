@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.repository;
+ackage com.autoorion.repository;
 import com.autoorion.entity.GrupoParametro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

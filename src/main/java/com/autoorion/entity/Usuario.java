@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.entity;
+ackage com.autoorion.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

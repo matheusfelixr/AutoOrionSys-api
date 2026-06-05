@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.security;
+ackage com.autoorion.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

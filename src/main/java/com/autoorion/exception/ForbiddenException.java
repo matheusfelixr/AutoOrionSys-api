@@ -1,4 +1,4 @@
-﻿ackage com.autoorion.exception;
+ackage com.autoorion.exception;
 
 import org.springframework.http.HttpStatus;
 
