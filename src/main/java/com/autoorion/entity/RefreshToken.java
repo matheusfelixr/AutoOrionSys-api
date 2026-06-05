@@ -1,4 +1,4 @@
-ackage com.autoorion.entity;
+﻿package com.autoorion.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

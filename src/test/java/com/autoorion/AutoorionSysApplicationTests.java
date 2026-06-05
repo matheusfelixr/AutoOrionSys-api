@@ -1,10 +1,10 @@
-﻿package com.autoorion;
+package com.flexsys;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class autoorionBackendApplicationTests {
+class FlexsysBackendApplicationTests {
     @Test
     void contextLoads() {}
 }

@@ -1,11 +1,11 @@
-﻿package com.autoorion.controller;
+package com.flexsys.controller;
 
-import com.autoorion.dto.ApiResponse;
-import com.autoorion.entity.Usuario;
-import com.autoorion.exception.BusinessException;
-import com.autoorion.exception.ResourceNotFoundException;
-import com.autoorion.repository.UsuarioRepository;
-import com.autoorion.service.PermissionsService;
+import com.flexsys.dto.ApiResponse;
+import com.flexsys.entity.Usuario;
+import com.flexsys.exception.BusinessException;
+import com.flexsys.exception.ResourceNotFoundException;
+import com.flexsys.repository.UsuarioRepository;
+import com.flexsys.service.PermissionsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
-@io.swagger.v3.oas.annotations.tags.Tag(name = "UsuÃ¡rios", description = "CRUD de usuÃ¡rios do sistema com controle de perfil e acesso")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "Usuários", description = "CRUD de usuários do sistema com controle de perfil e acesso")
 public class UsuarioController {
 
     private final UsuarioRepository repository;
@@ -60,14 +60,14 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Usuario>> getById(@PathVariable String id) {
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("UsuÃ¡rio", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
         return ResponseEntity.ok(ApiResponse.ok(usuario));
     }
 
     @GetMapping("/{id}/permissions")
     public ResponseEntity<ApiResponse<List<String>>> getPermissions(@PathVariable String id) {
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("UsuÃ¡rio", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
         return ResponseEntity.ok(ApiResponse.ok(permissionsService.getPermissions(usuario.getPerfil())));
     }
 
@@ -76,13 +76,13 @@ public class UsuarioController {
     public ResponseEntity<ApiResponse<Usuario>> create(@RequestBody Map<String, Object> body) {
         String email = (String) body.get("email");
         if (email != null && repository.existsByEmail(email)) {
-            throw new BusinessException("E-mail jÃ¡ cadastrado no sistema.", "email");
+            throw new BusinessException("E-mail já cadastrado no sistema.", "email");
         }
 
         var usuario = Usuario.builder()
                 .nome((String) body.get("nome"))
                 .email(email)
-                .senha(passwordEncoder.encode(body.getOrDefault("senha", "autoorion123").toString()))
+                .senha(passwordEncoder.encode(body.getOrDefault("senha", "flexsys123").toString()))
                 .cargo((String) body.get("cargo"))
                 .perfil(Usuario.PerfilUsuario.valueOf((String) body.getOrDefault("perfil", "visualizador")))
                 .status(Usuario.StatusUsuario.valueOf((String) body.getOrDefault("status", "ativo")))
@@ -91,7 +91,7 @@ public class UsuarioController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.created(repository.save(usuario), "UsuÃ¡rio criado com sucesso!"));
+                .body(ApiResponse.created(repository.save(usuario), "Usuário criado com sucesso!"));
     }
 
     @PutMapping("/{id}")
@@ -99,12 +99,12 @@ public class UsuarioController {
     public ResponseEntity<ApiResponse<Usuario>> update(@PathVariable String id,
                                                         @RequestBody Map<String, Object> body) {
         Usuario usuario = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("UsuÃ¡rio", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
 
         String novoEmail = (String) body.get("email");
         if (novoEmail != null && !novoEmail.equals(usuario.getEmail())
                 && repository.existsByEmail(novoEmail)) {
-            throw new BusinessException("E-mail jÃ¡ cadastrado por outro usuÃ¡rio.", "email");
+            throw new BusinessException("E-mail já cadastrado por outro usuário.", "email");
         }
 
         if (body.containsKey("nome"))     usuario.setNome((String) body.get("nome"));
@@ -114,16 +114,16 @@ public class UsuarioController {
         if (body.containsKey("perfil"))   usuario.setPerfil(Usuario.PerfilUsuario.valueOf((String) body.get("perfil")));
         if (body.containsKey("status"))   usuario.setStatus(Usuario.StatusUsuario.valueOf((String) body.get("status")));
 
-        return ResponseEntity.ok(ApiResponse.ok(repository.save(usuario), "UsuÃ¡rio atualizado com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(repository.save(usuario), "Usuário atualizado com sucesso!"));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {
         if (!repository.existsById(id)) {
-            throw new ResourceNotFoundException("UsuÃ¡rio", id);
+            throw new ResourceNotFoundException("Usuário", id);
         }
         repository.deleteById(id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "UsuÃ¡rio excluÃ­do com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Usuário excluído com sucesso!"));
     }
 }

@@ -1,12 +1,12 @@
-ackage com.autoorion.entity;
+﻿package com.autoorion.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 /**
  * Perfil de acesso do sistema.
- * Define quais telas (screenNames) um grupo de usuÃ¡rios pode acessar.
- * Gerenciado via ConfiguraÃ§Ãµes â†’ Perfis.
+ * Define quais telas (screenNames) um grupo de usuários pode acessar.
+ * Gerenciado via Configurações → Perfis.
  */
 @Entity
 @Table(name = "perfis_acesso")
@@ -17,7 +17,7 @@ public class PerfilAcesso extends Auditable {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    /** Identificador Ãºnico do perfil (ex: admin, gerente, tecnico) */
+    /** Identificador único do perfil (ex: admin, gerente, tecnico) */
     @Column(nullable = false, unique = true, length = 50)
     private String codigo;
 
@@ -28,9 +28,9 @@ public class PerfilAcesso extends Auditable {
     private String descricao;
 
     /**
-     * Lista de screenNames permitidos â€” armazenada como JSON no banco.
+     * Lista de screenNames permitidos — armazenada como JSON no banco.
      * Ex: ["dashboard","usuarios","obras"]
-     * Usada pelo frontend para controlar quais telas o usuÃ¡rio vÃª.
+     * Usada pelo frontend para controlar quais telas o usuário vê.
      */
     @Column(name = "telas_permitidas", columnDefinition = "TEXT")
     private String telasPermitidas; // JSON array as string

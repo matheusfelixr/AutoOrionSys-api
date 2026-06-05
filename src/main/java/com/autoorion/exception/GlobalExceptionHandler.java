@@ -1,4 +1,4 @@
-ackage com.autoorion.exception;
+﻿package com.autoorion.exception;
 
 import com.autoorion.dto.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,11 +24,11 @@ import java.util.List;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    // â”€â”€ ExceÃ§Ãµes de negÃ³cio customizadas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Exceções de negócio customizadas ─────────────────────────────────────
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidation(ValidationException ex, HttpServletRequest req) {
-        log.debug("ValidaÃ§Ã£o falhou em {}: {}", req.getRequestURI(), ex.getMessage());
+        log.debug("Validação falhou em {}: {}", req.getRequestURI(), ex.getMessage());
         List<ApiResponse.FieldError> errors = ex.getFieldErrors().stream()
                 .map(e -> ApiResponse.FieldError.builder()
                         .field(e.get("field"))
@@ -41,14 +41,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleNotFound(ResourceNotFoundException ex, HttpServletRequest req) {
-        log.debug("Recurso nÃ£o encontrado em {}: {}", req.getRequestURI(), ex.getMessage());
+        log.debug("Recurso não encontrado em {}: {}", req.getRequestURI(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.error(ex.getMessage()));
     }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<Void>> handleBusiness(BusinessException ex, HttpServletRequest req) {
-        log.warn("Erro de negÃ³cio em {}: {}", req.getRequestURI(), ex.getMessage());
+        log.warn("Erro de negócio em {}: {}", req.getRequestURI(), ex.getMessage());
 
         if (ex.getField() != null) {
             var fieldError = ApiResponse.FieldError.builder()
@@ -63,12 +63,12 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(ex.getMessage()));
     }
 
-    // â”€â”€ Spring Validation (@Valid) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Spring Validation (@Valid) ────────────────────────────────────────────
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpServletRequest req) {
-        log.debug("ValidaÃ§Ã£o de campos falhou em {}", req.getRequestURI());
+        log.debug("Validação de campos falhou em {}", req.getRequestURI());
         List<ApiResponse.FieldError> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(f -> ApiResponse.FieldError.builder()
                         .field(f.getField())
@@ -76,16 +76,16 @@ public class GlobalExceptionHandler {
                         .build())
                 .toList();
         return ResponseEntity.badRequest()
-                .body(ApiResponse.validationError("Dados invÃ¡lidos. Verifique os campos destacados.", errors));
+                .body(ApiResponse.validationError("Dados inválidos. Verifique os campos destacados.", errors));
     }
 
-    // â”€â”€ Spring Security â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Spring Security ───────────────────────────────────────────────────────
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Void>> handleAccessDenied(AccessDeniedException ex, HttpServletRequest req) {
-        log.warn("Acesso negado em {} por usuÃ¡rio nÃ£o autorizado", req.getRequestURI());
+        log.warn("Acesso negado em {} por usuário não autorizado", req.getRequestURI());
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                .body(ApiResponse.error("VocÃª nÃ£o tem permissÃ£o para realizar esta aÃ§Ã£o."));
+                .body(ApiResponse.error("Você não tem permissão para realizar esta ação."));
     }
 
     @ExceptionHandler(BadCredentialsException.class)
@@ -97,59 +97,59 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DisabledException.class)
     public ResponseEntity<ApiResponse<Void>> handleDisabled(DisabledException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error("UsuÃ¡rio inativo. Entre em contato com o administrador."));
+                .body(ApiResponse.error("Usuário inativo. Entre em contato com o administrador."));
     }
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ApiResponse<Void>> handleAuthentication(AuthenticationException ex, HttpServletRequest req) {
-        log.warn("Falha de autenticaÃ§Ã£o em {}: {}", req.getRequestURI(), ex.getMessage());
+        log.warn("Falha de autenticação em {}: {}", req.getRequestURI(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(ApiResponse.error("NÃ£o autenticado ou sessÃ£o expirada."));
+                .body(ApiResponse.error("Não autenticado ou sessão expirada."));
     }
 
-    // â”€â”€ HTTP / Request â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── HTTP / Request ────────────────────────────────────────────────────────
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<ApiResponse<Void>> handleNoHandler(NoHandlerFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.error("Endpoint nÃ£o encontrado: " + ex.getRequestURL()));
+                .body(ApiResponse.error("Endpoint não encontrado: " + ex.getRequestURL()));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ApiResponse<Void>> handleNotReadable(HttpMessageNotReadableException ex) {
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("Corpo da requisiÃ§Ã£o invÃ¡lido ou malformado."));
+                .body(ApiResponse.error("Corpo da requisição inválido ou malformado."));
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ApiResponse<Void>> handleMissingParam(MissingServletRequestParameterException ex) {
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("ParÃ¢metro obrigatÃ³rio ausente: " + ex.getParameterName()));
+                .body(ApiResponse.error("Parâmetro obrigatório ausente: " + ex.getParameterName()));
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         return ResponseEntity.badRequest()
-                .body(ApiResponse.error("Valor invÃ¡lido para o parÃ¢metro '" + ex.getName() + "': " + ex.getValue()));
+                .body(ApiResponse.error("Valor inválido para o parâmetro '" + ex.getName() + "': " + ex.getValue()));
     }
 
-    // â”€â”€ Banco de dados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Banco de dados ────────────────────────────────────────────────────────
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ApiResponse<Void>> handleDataIntegrity(DataIntegrityViolationException ex, HttpServletRequest req) {
-        log.warn("ViolaÃ§Ã£o de integridade em {}: {}", req.getRequestURI(), ex.getMostSpecificCause().getMessage());
-        String msg = "OperaÃ§Ã£o nÃ£o permitida: dados duplicados ou referÃªncia invÃ¡lida.";
+        log.warn("Violação de integridade em {}: {}", req.getRequestURI(), ex.getMostSpecificCause().getMessage());
+        String msg = "Operação não permitida: dados duplicados ou referência inválida.";
         String cause = ex.getMostSpecificCause().getMessage();
         if (cause != null) {
-            if (cause.contains("email"))        msg = "JÃ¡ existe um cadastro com este e-mail.";
-            else if (cause.contains("cpf"))     msg = "JÃ¡ existe um cadastro com este CPF.";
-            else if (cause.contains("placa"))   msg = "JÃ¡ existe um veÃ­culo com esta placa.";
-            else if (cause.contains("codigo"))  msg = "JÃ¡ existe um registro com este cÃ³digo.";
+            if (cause.contains("email"))        msg = "Já existe um cadastro com este e-mail.";
+            else if (cause.contains("cpf"))     msg = "Já existe um cadastro com este CPF.";
+            else if (cause.contains("placa"))   msg = "Já existe um veículo com esta placa.";
+            else if (cause.contains("codigo"))  msg = "Já existe um registro com este código.";
         }
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiResponse.error(msg));
     }
 
-    // â”€â”€ Fallback geral â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Fallback geral ────────────────────────────────────────────────────────
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleGeneral(Exception ex, HttpServletRequest req) {

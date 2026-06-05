@@ -1,23 +1,23 @@
-﻿spring:
+spring:
   application:
-    name: autoorion-backend
+    name: flexsys-backend
 
-  # â”€â”€ MVC / Error Handling â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # ── MVC / Error Handling ────────────────────────────────────────────
   mvc:
     throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
 
-  # â”€â”€ Upload / Request size â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # ── Upload / Request size ────────────────────────────────────────────
   servlet:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
 
-  # â”€â”€ Banco de dados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  # ── Banco de dados ──────────────────────────────────────────────────
   datasource:
-    url: jdbc:h2:mem:autooriondb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:flexsysdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
@@ -38,33 +38,33 @@
         format_sql: true
         dialect: org.hibernate.dialect.H2Dialect
 
-  # â”€â”€ Liquibase â€” DESABILITADO em dev (H2) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  # Em produÃ§Ã£o com PostgreSQL: habilitado via application-prod.yml
+  # ── Liquibase — DESABILITADO em dev (H2) ────────────────────────────
+  # Em produção com PostgreSQL: habilitado via application-prod.yml
   liquibase:
     enabled: false
 
-# â”€â”€ Servidor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Servidor ────────────────────────────────────────────────────────
 server:
   port: 8080
   tomcat:
     max-http-form-post-size: 20971520  # 20MB para suportar base64 de fotos
 
-# â”€â”€ JWT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-autoorion:
+# ── JWT ─────────────────────────────────────────────────────────────
+flexsys:
   jwt:
-    secret: ${JWT_SECRET:autoorion-jwt-secret-key-2024-muito-seguro-e-longo-para-hmac-sha256}
+    secret: ${JWT_SECRET:flexsys-jwt-secret-key-2024-muito-seguro-e-longo-para-hmac-sha256}
     expiration: 86400000  # 24 horas em ms
     refresh-expiration: 604800000  # 7 dias em ms
   cors:
     allowed-origins: "http://localhost:4200,http://localhost:4201"
 
-# â”€â”€ Logging â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Logging ─────────────────────────────────────────────────────────
 logging:
   level:
-    com.autoorion: DEBUG
+    com.flexsys: DEBUG
     org.springframework.security: INFO
 
-# â”€â”€ SpringDoc / Swagger UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── SpringDoc / Swagger UI ───────────────────────────────────────────
 springdoc:
   api-docs:
     path: /v3/api-docs
@@ -76,9 +76,9 @@ springdoc:
     filter: true
     displayRequestDuration: true
   show-actuator: false
-  packages-to-scan: com.autoorion.controller
+  packages-to-scan: com.flexsys.controller
 
-# â”€â”€ DevTools â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── DevTools ────────────────────────────────────────────────────────
   devtools:
     restart:
       enabled: true
@@ -86,7 +86,7 @@ springdoc:
     livereload:
       enabled: false
 
-# â”€â”€ Actuator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Actuator ────────────────────────────────────────────────────────
 management:
   endpoints:
     web:
@@ -103,6 +103,6 @@ management:
 
 info:
   app:
-    name: autoorion Backend
+    name: FlexSys Backend
     version: 1.0.0
-    description: API REST do sistema autoorion
+    description: API REST do sistema FlexSys

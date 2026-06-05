@@ -1,4 +1,4 @@
-ackage com.autoorion.dto;
+﻿package com.autoorion.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

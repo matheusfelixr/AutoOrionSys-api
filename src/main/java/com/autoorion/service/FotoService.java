@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.entity.Foto;
 import com.autoorion.exception.ResourceNotFoundException;
@@ -38,6 +38,6 @@ public class FotoService {
         var foto = findById(id);
         foto.setAtivo(false);
         repository.save(foto);
-        log.info("[FotoService] ExcluÃ­da (soft): id={}", id);
+        log.info("[FotoService] Excluída (soft): id={}", id);
     }
 }

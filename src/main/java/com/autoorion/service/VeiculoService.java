@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.entity.Veiculo;
 import com.autoorion.exception.BusinessException;
@@ -32,12 +32,12 @@ public class VeiculoService {
 
     public Veiculo findById(String id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("VeÃ­culo", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Veículo", id));
     }
 
     public Veiculo create(Veiculo veiculo) {
         if (veiculo.getPlaca() != null && repository.existsByPlaca(veiculo.getPlaca())) {
-            throw new BusinessException("Placa jÃ¡ cadastrada no sistema.", "placa");
+            throw new BusinessException("Placa já cadastrada no sistema.", "placa");
         }
         veiculo.setAtivo(true);
         if (veiculo.getKm() == null) veiculo.setKm(0L);
@@ -47,8 +47,8 @@ public class VeiculoService {
         usuarioRepository.findByPerfilAtivo("admin").forEach(admin -> {
             notificacaoService.enviar(
                 admin.getId(),
-                "Novo veÃ­culo cadastrado",
-                "O veÃ­culo " + saved.getModelo() + " (" + saved.getPlaca() + ") foi cadastrado.",
+                "Novo veículo cadastrado",
+                "O veículo " + saved.getModelo() + " (" + saved.getPlaca() + ") foi cadastrado.",
                 "info"
             );
         });
@@ -56,7 +56,7 @@ public class VeiculoService {
     }
 
     public Veiculo update(String id, Veiculo body) {
-        if (!repository.existsById(id)) throw new ResourceNotFoundException("VeÃ­culo", id);
+        if (!repository.existsById(id)) throw new ResourceNotFoundException("Veículo", id);
         body.setId(id);
         body.setAtivo(true);
         log.info("[VeiculoService] Atualizado: id={}", id);
@@ -67,6 +67,6 @@ public class VeiculoService {
         var veiculo = findById(id);
         veiculo.setAtivo(false); // soft delete
         repository.save(veiculo);
-        log.info("[VeiculoService] ExcluÃ­do (soft): id={}", id);
+        log.info("[VeiculoService] Excluído (soft): id={}", id);
     }
 }

@@ -1,9 +1,9 @@
-﻿package com.autoorion.controller;
+package com.flexsys.controller;
 
-import com.autoorion.dto.ApiResponse;
-import com.autoorion.dto.LoginRequest;
-import com.autoorion.dto.LoginResponse;
-import com.autoorion.service.AuthService;
+import com.flexsys.dto.ApiResponse;
+import com.flexsys.dto.LoginRequest;
+import com.flexsys.dto.LoginResponse;
+import com.flexsys.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "AutenticaÃ§Ã£o", description = "Endpoints de login e gestÃ£o de sessÃ£o")
+@Tag(name = "Autenticação", description = "Endpoints de login e gestão de sessão")
 public class AuthController {
 
     private final AuthService authService;
@@ -29,16 +29,16 @@ public class AuthController {
     @Operation(
         summary = "Realizar login",
         description = """
-            Autentica o usuÃ¡rio e retorna um token JWT vÃ¡lido por 24 horas.
-            O token deve ser enviado no header `Authorization: Bearer {token}` em todas as demais requisiÃ§Ãµes.
+            Autentica o usuário e retorna um token JWT válido por 24 horas.
+            O token deve ser enviado no header `Authorization: Bearer {token}` em todas as demais requisições.
             """,
         requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(examples = @ExampleObject(
                 name = "Login Admin",
                 value = """
                     {
-                      "email": "ana.souza@autoorion.com.br",
-                      "senha": "autoorion123"
+                      "email": "ana.souza@flexsys.com.br",
+                      "senha": "flexsys123"
                     }
                     """
             ))
@@ -46,10 +46,10 @@ public class AuthController {
     )
     @ApiResponses({
         @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Login realizado com sucesso"),
-        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "E-mail ou senha invÃ¡lidos"),
-        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "UsuÃ¡rio inativo"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "E-mail ou senha inválidos"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "Usuário inativo"),
     })
-    @SecurityRequirements  // Login nÃ£o precisa de token
+    @SecurityRequirements  // Login não precisa de token
     public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
         LoginResponse response = authService.login(request);
         return ResponseEntity.ok(ApiResponse.ok(response, "Login realizado com sucesso!"));

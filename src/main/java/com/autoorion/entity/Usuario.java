@@ -1,4 +1,4 @@
-ackage com.autoorion.entity;
+﻿package com.autoorion.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -48,7 +48,7 @@ public class Usuario extends Auditable {
 
     private String telefone;
 
-    /** URL ou base64 do avatar do usuÃ¡rio */
+    /** URL ou base64 do avatar do usuário */
     @Column(name = "avatar_url", columnDefinition = "TEXT")
     private String avatarUrl;
 

@@ -1,4 +1,4 @@
-ackage com.autoorion.entity;
+﻿package com.autoorion.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 /**
- * Classe base com campos de auditoria automÃ¡ticos.
- * Toda entidade que herdar esta classe terÃ¡:
- *   - criadoEm: preenchido automaticamente na criaÃ§Ã£o
+ * Classe base com campos de auditoria automáticos.
+ * Toda entidade que herdar esta classe terá:
+ *   - criadoEm: preenchido automaticamente na criação
  *   - atualizadoEm: atualizado automaticamente em cada save
  */
 @MappedSuperclass
@@ -29,7 +29,7 @@ public abstract class Auditable {
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    /** Soft delete â€” false = registro excluÃ­do logicamente */
+    /** Soft delete — false = registro excluído logicamente */
     @Column(nullable = false)
     private Boolean ativo = true;
 }

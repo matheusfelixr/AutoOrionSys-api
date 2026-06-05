@@ -1,4 +1,4 @@
-ackage com.autoorion.security;
+﻿package com.autoorion.security;
 
 import com.autoorion.entity.Usuario;
 import com.autoorion.repository.UsuarioRepository;
@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findById(userId)
-                .orElseThrow(() -> new UsernameNotFoundException("UsuÃ¡rio nÃ£o encontrado: " + userId));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + userId));
 
         return User.builder()
                 .username(usuario.getId())

@@ -1,4 +1,4 @@
-ackage com.autoorion.repository;
+﻿package com.autoorion.repository;
 
 import com.autoorion.entity.Veiculo;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, String> {
 
     /**
      * Busca paginada com filtros opcionais.
-     * Usa CAST para comparaÃ§Ã£o de enum â€” compatÃ­vel com H2 e PostgreSQL.
+     * Usa CAST para comparação de enum — compatível com H2 e PostgreSQL.
      */
     @Query("""
         SELECT v FROM Veiculo v

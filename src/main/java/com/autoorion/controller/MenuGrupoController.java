@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.MenuGrupo;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/menus")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "Menus", description = "SeÃ§Ãµes de agrupamento do menu lateral")
+@Tag(name = "Menus", description = "Seções de agrupamento do menu lateral")
 public class MenuGrupoController {
 
     private final MenuGrupoRepository repository;
@@ -57,6 +57,6 @@ public class MenuGrupoController {
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {
         if (!repository.existsById(id)) throw new ResourceNotFoundException("Menu", id);
         repository.deleteById(id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "Menu excluÃ­do com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Menu excluído com sucesso!"));
     }
 }

@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.TelaSistema;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/telas")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "Telas do Sistema", description = "Cadastro das telas disponÃ­veis no sistema")
+@Tag(name = "Telas do Sistema", description = "Cadastro das telas disponíveis no sistema")
 public class TelaSistemaController {
 
     private final TelaSistemaRepository repository;
@@ -40,7 +40,7 @@ public class TelaSistemaController {
     @PostMapping
     public ResponseEntity<ApiResponse<TelaSistema>> create(@RequestBody TelaSistema body) {
         if (body.getScreenName() != null && repository.existsByScreenName(body.getScreenName())) {
-            throw new BusinessException("Screen name jÃ¡ cadastrado: " + body.getScreenName(), "screenName");
+            throw new BusinessException("Screen name já cadastrado: " + body.getScreenName(), "screenName");
         }
         body.setAtivo(true);
         if (body.getOrdem() == null) body.setOrdem(1);
@@ -66,6 +66,6 @@ public class TelaSistemaController {
         tela.setAtivo(false);
         repository.save(tela);
         log.info("[Telas] DELETE (soft): id={}", id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "Tela excluÃ­da com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Tela excluída com sucesso!"));
     }
 }

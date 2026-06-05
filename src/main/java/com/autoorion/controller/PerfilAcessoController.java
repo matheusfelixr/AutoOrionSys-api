@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.PerfilAcesso;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/perfis")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "Perfis de Acesso", description = "Gerenciamento de perfis e permissÃµes de telas")
+@Tag(name = "Perfis de Acesso", description = "Gerenciamento de perfis e permissões de telas")
 public class PerfilAcessoController {
 
     private final PerfilAcessoService perfilAcessoService;
@@ -57,6 +57,6 @@ public class PerfilAcessoController {
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {
         perfilAcessoService.delete(id);
         log.info("[Perfis] DELETE: id={}", id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "Perfil excluÃ­do com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Perfil excluído com sucesso!"));
     }
 }

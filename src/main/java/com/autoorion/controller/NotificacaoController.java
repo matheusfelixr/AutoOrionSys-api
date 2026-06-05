@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.dto.NotificacaoDTO;
@@ -21,7 +21,7 @@ public class NotificacaoController {
     private final NotificacaoService service;
     private final UsuarioService usuarioService;
 
-    /** Resolve o UUID do usuÃ¡rio a partir do email (principal do Spring Security) */
+    /** Resolve o UUID do usuário a partir do email (principal do Spring Security) */
     private String resolveUserId(UserDetails userDetails) {
         return usuarioService.findByEmail(userDetails.getUsername()).getId();
     }
@@ -45,27 +45,27 @@ public class NotificacaoController {
             @PathVariable String id,
             @AuthenticationPrincipal UserDetails userDetails) {
         var dto = service.marcarComoLida(id, resolveUserId(userDetails));
-        return ResponseEntity.ok(ApiResponse.ok(dto, "NotificaÃ§Ã£o marcada como lida"));
+        return ResponseEntity.ok(ApiResponse.ok(dto, "Notificação marcada como lida"));
     }
 
     @PutMapping("/lidas-todas")
     public ResponseEntity<ApiResponse<Void>> marcarTodasComoLidas(
             @AuthenticationPrincipal UserDetails userDetails) {
         service.marcarTodasComoLidas(resolveUserId(userDetails));
-        return ResponseEntity.ok(ApiResponse.ok(null, "Todas as notificaÃ§Ãµes marcadas como lidas"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Todas as notificações marcadas como lidas"));
     }
 
-    /** Endpoint para testes â€” envia uma notificaÃ§Ã£o para o prÃ³prio usuÃ¡rio logado */
+    /** Endpoint para testes — envia uma notificação para o próprio usuário logado */
     @PostMapping("/teste")
     public ResponseEntity<ApiResponse<NotificacaoDTO>> enviarTeste(
             @RequestBody Map<String, String> body,
             @AuthenticationPrincipal UserDetails userDetails) {
         var dto = service.enviar(
-                resolveUserId(userDetails),   // UUID correto â€” nÃ£o o email
+                resolveUserId(userDetails),   // UUID correto — não o email
                 body.getOrDefault("titulo", "Teste"),
-                body.getOrDefault("mensagem", "NotificaÃ§Ã£o de teste"),
+                body.getOrDefault("mensagem", "Notificação de teste"),
                 body.getOrDefault("tipo", "info")
         );
-        return ResponseEntity.ok(ApiResponse.ok(dto, "NotificaÃ§Ã£o enviada"));
+        return ResponseEntity.ok(ApiResponse.ok(dto, "Notificação enviada"));
     }
 }

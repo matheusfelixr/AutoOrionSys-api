@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.dto.LoginRequest;
 import com.autoorion.dto.LoginResponse;
@@ -26,15 +26,15 @@ public class AuthService {
         try {
             usuario = usuarioService.findByEmail(request.getEmail());
         } catch (Exception e) {
-            throw new BadCredentialsException("E-mail ou senha invÃ¡lidos");
+            throw new BadCredentialsException("E-mail ou senha inválidos");
         }
 
         if (!passwordEncoder.matches(request.getSenha(), usuario.getSenha())) {
-            throw new BadCredentialsException("E-mail ou senha invÃ¡lidos");
+            throw new BadCredentialsException("E-mail ou senha inválidos");
         }
 
         if (usuario.getStatus() == Usuario.StatusUsuario.inativo) {
-            throw new DisabledException("UsuÃ¡rio inativo. Entre em contato com o administrador.");
+            throw new DisabledException("Usuário inativo. Entre em contato com o administrador.");
         }
 
         usuarioService.updateUltimoAcesso(usuario.getId());

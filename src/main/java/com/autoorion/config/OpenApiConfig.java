@@ -1,4 +1,4 @@
-package com.autoorion.config;
+﻿package com.autoorion.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * Configuraçoes do Swagger UI / OpenAPI 3.
+ * Configuração do Swagger UI / OpenAPI 3.
  *
  * Acesso: http://localhost:8080/swagger-ui.html
  * JSON:   http://localhost:8080/v3/api-docs
@@ -27,17 +27,17 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI autoorionOpenAPI() {
         return new OpenAPI()
-                // â”€â”€ InformaÃ§Ãµes gerais â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Informações gerais ────────────────────────────────────────────
                 .info(new Info()
                         .title("autoorion API")
                         .description("""
-                                API REST do sistema autoorion â€” plataforma modular de gestÃ£o empresarial.
+                                API REST do sistema autoorion — plataforma modular de gestão empresarial.
 
-                                ## AutenticaÃ§Ã£o
-                                Todos os endpoints (exceto `/api/auth/login`) requerem um token JWT vÃ¡lido.
+                                ## Autenticação
+                                Todos os endpoints (exceto `/api/auth/login`) requerem um token JWT válido.
 
                                 **Como usar:**
-                                1. FaÃ§a `POST /api/auth/login` com e-mail e senha
+                                1. Faça `POST /api/auth/login` com e-mail e senha
                                 2. Copie o campo `data.token` da resposta
                                 3. Clique em **Authorize** acima e cole: `Bearer {token}`
 
@@ -46,9 +46,9 @@ public class OpenApiConfig {
                                 |---|---|---|
                                 | ana.souza@autoorion.com.br | Admin | autoorion123 |
                                 | carlos.mendes@autoorion.com.br | Gerente | autoorion123 |
-                                | ricardo.alves@autoorion.com.br | TÃ©cnico | autoorion123 |
+                                | ricardo.alves@autoorion.com.br | Técnico | autoorion123 |
 
-                                ## PaginaÃ§Ã£o
+                                ## Paginação
                                 Endpoints de listagem aceitam: `?page=0&size=10&sortBy=nome&sortDir=asc`
                                 """)
                         .version("1.0.0")
@@ -59,13 +59,13 @@ public class OpenApiConfig {
                                 .name("Proprietary")
                                 .url("https://autoorion.com.br")))
 
-                // â”€â”€ Servidores â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Servidores ────────────────────────────────────────────────────
                 .servers(List.of(
                         new Server().url("http://localhost:8080").description("Desenvolvimento"),
-                        new Server().url("https://api.autoorion.com.br").description("ProduÃ§Ã£o")
+                        new Server().url("https://api.autoorion.com.br").description("Produção")
                 ))
 
-                // â”€â”€ SeguranÃ§a global (JWT Bearer) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+                // ── Segurança global (JWT Bearer) ─────────────────────────────────
                 .addSecurityItem(new SecurityRequirement().addList(SECURITY_SCHEME_NAME))
                 .components(new Components()
                         .addSecuritySchemes(SECURITY_SCHEME_NAME,

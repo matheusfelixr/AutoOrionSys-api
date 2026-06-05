@@ -1,4 +1,4 @@
-ackage com.autoorion.repository;
+﻿package com.autoorion.repository;
 
 import com.autoorion.entity.Usuario;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     /**
      * Busca paginada com filtros opcionais.
      *
-     * Nota: comparaÃ§Ãµes de enum no JPQL sÃ£o feitas via CAST para string
+     * Nota: comparações de enum no JPQL são feitas via CAST para string
      * para evitar problemas de tipo no H2 e outros bancos.
      */
     @Query(value = """

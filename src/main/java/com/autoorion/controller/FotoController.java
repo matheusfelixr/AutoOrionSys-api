@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.Foto;
@@ -69,6 +69,6 @@ public class FotoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {
         fotoService.delete(id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "Foto excluÃ­da com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Foto excluída com sucesso!"));
     }
 }

@@ -1,4 +1,4 @@
-ackage com.autoorion.dto;
+﻿package com.autoorion.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +25,6 @@ public class LoginResponse {
         private String perfil;
         private String status;
         private String telefone;
-        private String avatarUrl; // â† foto do usuÃ¡rio
+        private String avatarUrl; // ← foto do usuário
     }
 }

@@ -1,7 +1,7 @@
-﻿databaseChangeLog:
+databaseChangeLog:
   - changeSet:
       id: 003-notificacoes-index
-      author: autoorion
+      author: flexsys
       changes:
         - createIndex:
             indexName: idx_notif_usuario_id

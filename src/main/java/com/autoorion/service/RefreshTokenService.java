@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.entity.RefreshToken;
 import com.autoorion.exception.BusinessException;
@@ -24,7 +24,7 @@ public class RefreshTokenService {
     private final RefreshTokenRepository repository;
 
     public RefreshToken createRefreshToken(String usuarioId) {
-        // Remove tokens antigos do usuÃ¡rio
+        // Remove tokens antigos do usuário
         repository.deleteByUsuarioId(usuarioId);
 
         var token = RefreshToken.builder()
@@ -39,11 +39,11 @@ public class RefreshTokenService {
 
     public RefreshToken verifyExpiration(String tokenStr) {
         var token = repository.findByToken(tokenStr)
-                .orElseThrow(() -> new BusinessException("Refresh token invÃ¡lido ou nÃ£o encontrado.", HttpStatus.UNAUTHORIZED));
+                .orElseThrow(() -> new BusinessException("Refresh token inválido ou não encontrado.", HttpStatus.UNAUTHORIZED));
 
         if (token.getExpiraEm().isBefore(Instant.now())) {
             repository.delete(token);
-            throw new BusinessException("Refresh token expirado. FaÃ§a login novamente.", HttpStatus.UNAUTHORIZED);
+            throw new BusinessException("Refresh token expirado. Faça login novamente.", HttpStatus.UNAUTHORIZED);
         }
         return token;
     }
@@ -51,6 +51,6 @@ public class RefreshTokenService {
     @Transactional
     public void deleteByUsuarioId(String usuarioId) {
         repository.deleteByUsuarioId(usuarioId);
-        log.info("[RefreshTokenService] Tokens revogados para usuÃ¡rio: {}", usuarioId);
+        log.info("[RefreshTokenService] Tokens revogados para usuário: {}", usuarioId);
     }
 }

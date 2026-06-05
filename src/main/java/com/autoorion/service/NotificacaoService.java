@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.dto.NotificacaoDTO;
 import com.autoorion.entity.Notificacao;
@@ -19,7 +19,7 @@ public class NotificacaoService {
     private final NotificacaoRepository repo;
     private final SimpMessagingTemplate messagingTemplate;
 
-    /** Cria e persiste uma notificaÃ§Ã£o, depois envia via WebSocket ao usuÃ¡rio */
+    /** Cria e persiste uma notificação, depois envia via WebSocket ao usuário */
     @Transactional
     public NotificacaoDTO enviar(String usuarioId, String titulo, String mensagem, String tipo) {
         Notificacao notificacao = Notificacao.builder()
@@ -32,13 +32,13 @@ public class NotificacaoService {
         notificacao = repo.save(notificacao);
         NotificacaoDTO dto = NotificacaoDTO.from(notificacao);
 
-        // Usa /topic/notificacoes/{usuarioId} â€” topic direto por UUID do usuÃ¡rio.
-        // Evita confusÃ£o com convertAndSendToUser que usa o principal do Spring Security (email).
+        // Usa /topic/notificacoes/{usuarioId} — topic direto por UUID do usuário.
+        // Evita confusão com convertAndSendToUser que usa o principal do Spring Security (email).
         try {
             messagingTemplate.convertAndSend("/topic/notificacoes/" + usuarioId, dto);
-            log.info("NotificaÃ§Ã£o enviada via WS para usuÃ¡rio {}: {}", usuarioId, titulo);
+            log.info("Notificação enviada via WS para usuário {}: {}", usuarioId, titulo);
         } catch (Exception e) {
-            log.warn("Falha ao enviar notificaÃ§Ã£o WS para {}: {}", usuarioId, e.getMessage());
+            log.warn("Falha ao enviar notificação WS para {}: {}", usuarioId, e.getMessage());
         }
 
         return dto;
@@ -57,7 +57,7 @@ public class NotificacaoService {
     public NotificacaoDTO marcarComoLida(String id, String usuarioId) {
         Notificacao n = repo.findById(id)
                 .filter(notif -> notif.getUsuarioId().equals(usuarioId))
-                .orElseThrow(() -> new RuntimeException("NotificaÃ§Ã£o nÃ£o encontrada"));
+                .orElseThrow(() -> new RuntimeException("Notificação não encontrada"));
         n.setLida(true);
         return NotificacaoDTO.from(repo.save(n));
     }

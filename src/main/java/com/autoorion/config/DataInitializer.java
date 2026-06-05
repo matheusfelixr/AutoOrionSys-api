@@ -1,4 +1,4 @@
-package com.autoorion.config;
+﻿package com.autoorion.config;
 
 import com.autoorion.entity.*;
 import com.autoorion.repository.*;
@@ -31,11 +31,11 @@ public class DataInitializer {
             PerfilAcessoRepository perfilAcessoRepo) {
         return args -> {
             if (usuarios.count() > 0) return;
-            log.info("Inicializando dados de demonstraÃ§Ã£o...");
+            log.info("Inicializando dados de demonstração...");
 
             String senhaDefault = passwordEncoder.encode("autoorion123");
 
-            // â”€â”€ UsuÃ¡rios â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Usuários ─────────────────────────────────────────────────────
             usuarios.save(Usuario.builder().nome("Ana Souza").email("ana.souza@autoorion.com.br")
                     .senha(senhaDefault).cargo("Gerente de Projetos").perfil(Usuario.PerfilUsuario.admin)
                     .status(Usuario.StatusUsuario.ativo).telefone("(48) 99101-2233")
@@ -51,126 +51,126 @@ public class DataInitializer {
                     .status(Usuario.StatusUsuario.ativo).dataCadastro(LocalDateTime.now()).build());
 
             usuarios.save(Usuario.builder().nome("Ricardo Alves").email("ricardo.alves@autoorion.com.br")
-                    .senha(senhaDefault).cargo("TÃ©cnico de Campo").perfil(Usuario.PerfilUsuario.tecnico)
+                    .senha(senhaDefault).cargo("Técnico de Campo").perfil(Usuario.PerfilUsuario.tecnico)
                     .status(Usuario.StatusUsuario.ativo).dataCadastro(LocalDateTime.now()).build());
 
             usuarios.save(Usuario.builder().nome("Camila Santos").email("camila.santos@autoorion.com.br")
                     .senha(senhaDefault).cargo("Analista").perfil(Usuario.PerfilUsuario.visualizador)
                     .status(Usuario.StatusUsuario.ativo).dataCadastro(LocalDateTime.now()).build());
 
-            // â”€â”€ Menus Grupos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-            var mg1 = menuGrupos.save(MenuGrupo.builder().nome("Principal").icone("ðŸ ").ordem(1).build());
-            var mg2 = menuGrupos.save(MenuGrupo.builder().nome("Cadastros").icone("ðŸ“‹").ordem(2).build());
-            var mg3 = menuGrupos.save(MenuGrupo.builder().nome("ConfiguraÃ§Ãµes").icone("âš™ï¸").ordem(3).build());
-            var mg4 = menuGrupos.save(MenuGrupo.builder().nome("Conta").icone("ðŸ‘¤").ordem(4).build());
+            // ── Menus Grupos ─────────────────────────────────────────────────
+            var mg1 = menuGrupos.save(MenuGrupo.builder().nome("Principal").icone("🏠").ordem(1).build());
+            var mg2 = menuGrupos.save(MenuGrupo.builder().nome("Cadastros").icone("📋").ordem(2).build());
+            var mg3 = menuGrupos.save(MenuGrupo.builder().nome("Configurações").icone("⚙️").ordem(3).build());
+            var mg4 = menuGrupos.save(MenuGrupo.builder().nome("Conta").icone("👤").ordem(4).build());
 
-            // â”€â”€ Telas do Sistema â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Telas do Sistema ──────────────────────────────────────────────
             // Principal (mg1)
-            telas.save(TelaSistema.builder().screenName("home").nome("InÃ­cio")
+            telas.save(TelaSistema.builder().screenName("home").nome("Início")
                     .descricao("Tela inicial do sistema").menuId(mg1.getId())
-                    .icone("ðŸ ").ordem(1).build());
-            telas.save(TelaSistema.builder().screenName("notificacoes-group").nome("NotificaÃ§Ãµes")
-                    .descricao("MÃ³dulo de notificaÃ§Ãµes (agrupador)").menuId(mg1.getId())
-                    .icone("ðŸ””").ordem(3).build());
-            telas.save(TelaSistema.builder().screenName("notificacoes").nome("Minhas NotificaÃ§Ãµes")
-                    .descricao("NotificaÃ§Ãµes do usuÃ¡rio logado").menuId(mg1.getId())
+                    .icone("🏠").ordem(1).build());
+            telas.save(TelaSistema.builder().screenName("notificacoes-group").nome("Notificações")
+                    .descricao("Módulo de notificações (agrupador)").menuId(mg1.getId())
+                    .icone("🔔").ordem(3).build());
+            telas.save(TelaSistema.builder().screenName("notificacoes").nome("Minhas Notificações")
+                    .descricao("Notificações do usuário logado").menuId(mg1.getId())
                     .parentScreenName("notificacoes-group").ordem(1).build());
-            telas.save(TelaSistema.builder().screenName("notificacoes.admin").nome("Gerenciar NotificaÃ§Ãµes")
-                    .descricao("Criar e gerenciar notificaÃ§Ãµes do sistema").menuId(mg1.getId())
+            telas.save(TelaSistema.builder().screenName("notificacoes.admin").nome("Gerenciar Notificações")
+                    .descricao("Criar e gerenciar notificações do sistema").menuId(mg1.getId())
                     .parentScreenName("notificacoes-group").ordem(2).build());
 
             // Cadastros (mg2)
-            telas.save(TelaSistema.builder().screenName("usuarios-group").nome("UsuÃ¡rios")
-                    .descricao("MÃ³dulo de usuÃ¡rios (agrupador)").menuId(mg2.getId())
-                    .icone("ðŸ‘¥").ordem(1).build());
-            telas.save(TelaSistema.builder().screenName("usuarios").nome("UsuÃ¡rios")
-                    .descricao("Cadastro e gestÃ£o de usuÃ¡rios").menuId(mg2.getId())
+            telas.save(TelaSistema.builder().screenName("usuarios-group").nome("Usuários")
+                    .descricao("Módulo de usuários (agrupador)").menuId(mg2.getId())
+                    .icone("👥").ordem(1).build());
+            telas.save(TelaSistema.builder().screenName("usuarios").nome("Usuários")
+                    .descricao("Cadastro e gestão de usuários").menuId(mg2.getId())
                     .parentScreenName("usuarios-group").ordem(1).build());
             telas.save(TelaSistema.builder().screenName("perfis").nome("Perfis")
                     .descricao("Perfis de acesso ao sistema").menuId(mg2.getId())
                     .parentScreenName("usuarios-group").ordem(2).build());
 
-            // ConfiguraÃ§Ãµes (mg3)
+            // Configurações (mg3)
             telas.save(TelaSistema.builder().screenName("config-group").nome("Telas")
-                    .descricao("ConfiguraÃ§Ãµes de telas (agrupador)").menuId(mg3.getId())
-                    .icone("âš™ï¸").ordem(1).build());
+                    .descricao("Configurações de telas (agrupador)").menuId(mg3.getId())
+                    .icone("⚙️").ordem(1).build());
             telas.save(TelaSistema.builder().screenName("config.telas").nome("Telas do Sistema")
                     .descricao("Cadastro das telas do sistema").menuId(mg3.getId())
                     .parentScreenName("config-group").ordem(1).build());
             telas.save(TelaSistema.builder().screenName("config.menus").nome("Menus")
-                    .descricao("OrganizaÃ§Ã£o dos menus laterais").menuId(mg3.getId())
+                    .descricao("Organização dos menus laterais").menuId(mg3.getId())
                     .parentScreenName("config-group").ordem(2).build());
-            telas.save(TelaSistema.builder().screenName("parametros-group").nome("ParÃ¢metros")
-                    .descricao("MÃ³dulo de parÃ¢metros (agrupador)").menuId(mg3.getId())
-                    .icone("ðŸ”§").ordem(2).build());
-            telas.save(TelaSistema.builder().screenName("parametros").nome("ParÃ¢metros")
-                    .descricao("ConfiguraÃ§Ãµes parametrizÃ¡veis do sistema").menuId(mg3.getId())
+            telas.save(TelaSistema.builder().screenName("parametros-group").nome("Parâmetros")
+                    .descricao("Módulo de parâmetros (agrupador)").menuId(mg3.getId())
+                    .icone("🔧").ordem(2).build());
+            telas.save(TelaSistema.builder().screenName("parametros").nome("Parâmetros")
+                    .descricao("Configurações parametrizáveis do sistema").menuId(mg3.getId())
                     .parentScreenName("parametros-group").ordem(1).build());
             telas.save(TelaSistema.builder().screenName("parametros.grupos").nome("Grupos")
-                    .descricao("Grupos de parÃ¢metros").menuId(mg3.getId())
+                    .descricao("Grupos de parâmetros").menuId(mg3.getId())
                     .parentScreenName("parametros-group").ordem(2).build());
 
             // Conta (mg4)
             telas.save(TelaSistema.builder().screenName("perfil").nome("Perfil")
-                    .descricao("Dados pessoais do usuÃ¡rio logado").menuId(mg4.getId())
-                    .icone("ðŸ§‘").ordem(1).build());
+                    .descricao("Dados pessoais do usuário logado").menuId(mg4.getId())
+                    .icone("🧑").ordem(1).build());
             telas.save(TelaSistema.builder().screenName("sair").nome("Sair")
                     .descricao("Sair do sistema").menuId(mg4.getId())
-                    .icone("ðŸšª").ordem(2).build());
+                    .icone("🚪").ordem(2).build());
 
-            // â”€â”€ Grupos de ParÃ¢metros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Grupos de Parâmetros ─────────────────────────────────────────
             var gpGeral = gruposParametro.save(GrupoParametro.builder().nome("Geral")
-                    .descricao("ConfiguraÃ§Ãµes gerais do sistema").ordem(1).build());
+                    .descricao("Configurações gerais do sistema").ordem(1).build());
             var gpFinanceiro = gruposParametro.save(GrupoParametro.builder().nome("Financeiro")
-                    .descricao("ConfiguraÃ§Ãµes financeiras").ordem(2).build());
+                    .descricao("Configurações financeiras").ordem(2).build());
             var gpObras = gruposParametro.save(GrupoParametro.builder().nome("Obras")
-                    .descricao("ConfiguraÃ§Ãµes de obras e projetos").ordem(3).build());
-            var gpNotif = gruposParametro.save(GrupoParametro.builder().nome("NotificaÃ§Ãµes")
-                    .descricao("ConfiguraÃ§Ãµes de notificaÃ§Ãµes").ordem(4).build());
-            var gpSeg = gruposParametro.save(GrupoParametro.builder().nome("SeguranÃ§a")
-                    .descricao("ConfiguraÃ§Ãµes de seguranÃ§a e acesso").ordem(5).build());
+                    .descricao("Configurações de obras e projetos").ordem(3).build());
+            var gpNotif = gruposParametro.save(GrupoParametro.builder().nome("Notificações")
+                    .descricao("Configurações de notificações").ordem(4).build());
+            var gpSeg = gruposParametro.save(GrupoParametro.builder().nome("Segurança")
+                    .descricao("Configurações de segurança e acesso").ordem(5).build());
 
-            // â”€â”€ ParÃ¢metros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Parâmetros ───────────────────────────────────────────────────
             parametros.save(Parametro.builder().nome("prmNomeSistema").descricao("Nome exibido no sistema")
                     .grupoId(gpGeral.getId()).valor("autoorion Demo").tipo("texto").ordem(1).build());
-            parametros.save(Parametro.builder().nome("prmVersao").descricao("VersÃ£o atual do sistema")
+            parametros.save(Parametro.builder().nome("prmVersao").descricao("Versão atual do sistema")
                     .grupoId(gpGeral.getId()).valor("1.0.0").tipo("texto").ordem(2).build());
-            parametros.save(Parametro.builder().nome("prmItensPorPagina").descricao("Quantidade de itens por pÃ¡gina nas listagens")
+            parametros.save(Parametro.builder().nome("prmItensPorPagina").descricao("Quantidade de itens por página nas listagens")
                     .grupoId(gpGeral.getId()).valor("10").tipo("numero").ordem(3).build());
 
             parametros.save(Parametro.builder().nome("prmArredondamento").descricao("Casas decimais para arredondamento financeiro")
                     .grupoId(gpFinanceiro.getId()).valor("2").tipo("numero").ordem(1).build());
-            parametros.save(Parametro.builder().nome("prmMoeda").descricao("Moeda padrÃ£o do sistema")
+            parametros.save(Parametro.builder().nome("prmMoeda").descricao("Moeda padrão do sistema")
                     .grupoId(gpFinanceiro.getId()).valor("BRL").tipo("lista")
                     .opcoes("[\"BRL\",\"USD\",\"EUR\"]").ordem(2).build());
 
-            parametros.save(Parametro.builder().nome("prmUnidadeMedida").descricao("Unidade de medida padrÃ£o para obras")
-                    .grupoId(gpObras.getId()).valor("mÂ²").tipo("lista")
-                    .opcoes("[\"mÂ²\",\"mÂ³\",\"un\",\"kg\"]").ordem(1).build());
+            parametros.save(Parametro.builder().nome("prmUnidadeMedida").descricao("Unidade de medida padrão para obras")
+                    .grupoId(gpObras.getId()).valor("m²").tipo("lista")
+                    .opcoes("[\"m²\",\"m³\",\"un\",\"kg\"]").ordem(1).build());
 
-            parametros.save(Parametro.builder().nome("prmNotifAtivas").descricao("Habilitar envio de notificaÃ§Ãµes")
+            parametros.save(Parametro.builder().nome("prmNotifAtivas").descricao("Habilitar envio de notificações")
                     .grupoId(gpNotif.getId()).valor("true").tipo("booleano").ordem(1).build());
 
-            parametros.save(Parametro.builder().nome("prmTentativasLogin").descricao("NÃºmero mÃ¡ximo de tentativas de login")
+            parametros.save(Parametro.builder().nome("prmTentativasLogin").descricao("Número máximo de tentativas de login")
                     .grupoId(gpSeg.getId()).valor("5").tipo("numero").ordem(1).build());
-            parametros.save(Parametro.builder().nome("prmTempoSessao").descricao("Tempo de sessÃ£o em minutos")
+            parametros.save(Parametro.builder().nome("prmTempoSessao").descricao("Tempo de sessão em minutos")
                     .grupoId(gpSeg.getId()).valor("60").tipo("numero").ordem(2).build());
 
-            // â”€â”€ NotificaÃ§Ãµes demo (vinculadas ao admin Ana Souza) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Notificações demo (vinculadas ao admin Ana Souza) ────────────
             var adminDemo = usuarios.findByEmail("ana.souza@autoorion.com.br").orElse(null);
             if (adminDemo != null) {
                 notificacoes.save(Notificacao.builder()
                         .usuarioId(adminDemo.getId())
                         .titulo("Bem-vindo ao autoorion!")
-                        .mensagem("O sistema foi inicializado com sucesso. Explore os mÃ³dulos no menu lateral.")
+                        .mensagem("O sistema foi inicializado com sucesso. Explore os módulos no menu lateral.")
                         .tipo("success").lida(false)
                         .criadoEm(LocalDateTime.now().minusDays(2))
                         .build());
 
                 notificacoes.save(Notificacao.builder()
                         .usuarioId(adminDemo.getId())
-                        .titulo("ManutenÃ§Ã£o programada")
-                        .mensagem("O sistema passarÃ¡ por manutenÃ§Ã£o preventiva neste fim de semana das 22h Ã s 6h.")
+                        .titulo("Manutenção programada")
+                        .mensagem("O sistema passará por manutenção preventiva neste fim de semana das 22h às 6h.")
                         .tipo("warning").lida(false)
                         .criadoEm(LocalDateTime.now().minusHours(5))
                         .build());
@@ -178,13 +178,13 @@ public class DataInitializer {
                 notificacoes.save(Notificacao.builder()
                         .usuarioId(adminDemo.getId())
                         .titulo("Sistema configurado")
-                        .mensagem("Os mÃ³dulos do sistema foram configurados com sucesso.")
+                        .mensagem("Os módulos do sistema foram configurados com sucesso.")
                         .tipo("info").lida(true)
                         .criadoEm(LocalDateTime.now().minusHours(1))
                         .build());
             }
 
-            // â”€â”€ Perfis de Acesso â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ── Perfis de Acesso ─────────────────────────────────────────────
             if (perfilAcessoRepo.count() == 0) {
                 perfilAcessoRepo.save(PerfilAcesso.builder()
                     .codigo("admin")
@@ -204,7 +204,7 @@ public class DataInitializer {
 
                 perfilAcessoRepo.save(PerfilAcesso.builder()
                     .codigo("tecnico")
-                    .nome("TÃ©cnico")
+                    .nome("Técnico")
                     .descricao("Acesso operacional")
                     .telasPermitidas("[\"home\",\"perfil\",\"notificacoes\"]")
                     .totalUsuarios(7)
@@ -213,15 +213,15 @@ public class DataInitializer {
                 perfilAcessoRepo.save(PerfilAcesso.builder()
                     .codigo("visualizador")
                     .nome("Visualizador")
-                    .descricao("Somente visualizaÃ§Ã£o")
+                    .descricao("Somente visualização")
                     .telasPermitidas("[\"home\",\"perfil\",\"notificacoes\"]")
                     .totalUsuarios(2)
                     .build());
 
-                log.info("âœ… Perfis de acesso inicializados: {} perfis", perfilAcessoRepo.count());
+                log.info("✅ Perfis de acesso inicializados: {} perfis", perfilAcessoRepo.count());
             }
 
-            log.info("Dados inicializados: {} usuÃ¡rios, {} menus, {} telas, {} grupos, {} parÃ¢metros, {} notificaÃ§Ãµes",
+            log.info("Dados inicializados: {} usuários, {} menus, {} telas, {} grupos, {} parâmetros, {} notificações",
                     usuarios.count(), menuGrupos.count(),
                     telas.count(), gruposParametro.count(), parametros.count(), notificacoes.count());
         };

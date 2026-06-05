@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.autoorion.entity.Usuario;
 import com.autoorion.exception.BusinessException;
@@ -38,18 +38,18 @@ public class UsuarioService {
 
     public Usuario findById(String id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("UsuÃ¡rio", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário", id));
     }
 
     public Usuario findByEmail(String email) {
         return repository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("UsuÃ¡rio por email", email));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário por email", email));
     }
 
     public Usuario create(Map<String, Object> body) {
         String email = (String) body.get("email");
         if (email != null && repository.existsByEmail(email)) {
-            throw new BusinessException("JÃ¡ existe um usuÃ¡rio com este e-mail.", org.springframework.http.HttpStatus.CONFLICT, "CONFLICT");
+            throw new BusinessException("Já existe um usuário com este e-mail.", org.springframework.http.HttpStatus.CONFLICT, "CONFLICT");
         }
         var usuario = Usuario.builder()
                 .nome((String) body.get("nome"))
@@ -63,7 +63,7 @@ public class UsuarioService {
                 .build();
         var saved = repository.save(usuario);
         log.info("[UsuarioService] Criado: email={}", email);
-        // Notifica o prÃ³prio usuÃ¡rio criado
+        // Notifica o próprio usuário criado
         notificacaoService.enviar(
             saved.getId(),
             "Bem-vindo ao autoorion!",
@@ -78,7 +78,7 @@ public class UsuarioService {
         String novoEmail = (String) body.get("email");
         if (novoEmail != null && !novoEmail.equals(usuario.getEmail())
                 && repository.existsByEmail(novoEmail)) {
-            throw new BusinessException("E-mail jÃ¡ cadastrado por outro usuÃ¡rio.", org.springframework.http.HttpStatus.CONFLICT, "CONFLICT");
+            throw new BusinessException("E-mail já cadastrado por outro usuário.", org.springframework.http.HttpStatus.CONFLICT, "CONFLICT");
         }
         if (body.containsKey("nome"))     usuario.setNome((String) body.get("nome"));
         if (body.containsKey("email"))    usuario.setEmail(novoEmail);
@@ -99,9 +99,9 @@ public class UsuarioService {
     }
 
     public void delete(String id) {
-        if (!repository.existsById(id)) throw new ResourceNotFoundException("UsuÃ¡rio", id);
+        if (!repository.existsById(id)) throw new ResourceNotFoundException("Usuário", id);
         repository.deleteById(id);
-        log.info("[UsuarioService] ExcluÃ­do: id={}", id);
+        log.info("[UsuarioService] Excluído: id={}", id);
     }
 
     public void updateUltimoAcesso(String id) {

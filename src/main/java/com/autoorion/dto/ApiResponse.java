@@ -1,4 +1,4 @@
-ackage com.autoorion.dto;
+﻿package com.autoorion.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Envelope padrÃ£o para todas as respostas da API autoorion.
+ * Envelope padrão para todas as respostas da API autoorion.
  *
  * Sucesso:  { success: true,  data: T,    message: "...", timestamp }
  * Erro:     { success: false, data: null, message: "...", errors: [...], timestamp }
@@ -24,7 +24,7 @@ public class ApiResponse<T> {
     private T data;
     private String message;
 
-    /** Erros de validaÃ§Ã£o por campo: [{ field, message }] */
+    /** Erros de validação por campo: [{ field, message }] */
     private List<FieldError> errors;
 
     /** Para listas paginadas */
@@ -35,7 +35,7 @@ public class ApiResponse<T> {
 
     private LocalDateTime timestamp;
 
-    // â”€â”€ Factories â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Factories ──────────────────────────────────────────────────────────
 
     public static <T> ApiResponse<T> ok(T data) {
         return ApiResponse.<T>builder()
@@ -107,7 +107,7 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    // â”€â”€ Inner types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Inner types ────────────────────────────────────────────────────────
 
     @Data
     @Builder

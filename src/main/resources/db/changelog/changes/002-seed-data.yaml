@@ -1,5 +1,5 @@
-﻿databaseChangeLog:
+databaseChangeLog:
   - changeSet:
       id: 002-seed-data-placeholder
-      author: autoorion
+      author: flexsys
       changes: []

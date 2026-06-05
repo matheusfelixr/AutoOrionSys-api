@@ -1,12 +1,12 @@
-ackage com.autoorion.entity;
+﻿package com.autoorion.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 /**
  * Armazena fotos como base64 no banco de dados.
- * NÃ£o Ã© o ideal para produÃ§Ã£o em escala (use S3/MinIO para isso),
- * mas Ã© funcional e simples para demonstraÃ§Ã£o.
+ * Não é o ideal para produção em escala (use S3/MinIO para isso),
+ * mas é funcional e simples para demonstração.
  */
 @Entity
 @Table(name = "fotos",

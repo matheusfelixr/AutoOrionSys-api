@@ -1,4 +1,4 @@
-ackage com.autoorion.controller;
+﻿package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.Usuario;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "UsuÃ¡rios", description = "Gerenciamento de usuÃ¡rios do sistema")
+@Tag(name = "Usuários", description = "Gerenciamento de usuários do sistema")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -36,7 +36,7 @@ public class UsuarioController {
             @RequestParam(defaultValue = "nome") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
         var result = usuarioService.findAll(busca, perfil, status, page, size, sortBy, sortDir);
-        log.info("[UsuÃ¡rios] GET lista: total={}", result.getTotalElements());
+        log.info("[Usuários] GET lista: total={}", result.getTotalElements());
         return ResponseEntity.ok(ApiResponse.page(result));
     }
 
@@ -56,20 +56,20 @@ public class UsuarioController {
     public ResponseEntity<ApiResponse<Usuario>> create(@RequestBody Map<String, Object> body) {
         var usuario = usuarioService.create(body);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.created(usuario, "UsuÃ¡rio criado com sucesso!"));
+                .body(ApiResponse.created(usuario, "Usuário criado com sucesso!"));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
     public ResponseEntity<ApiResponse<Usuario>> update(@PathVariable String id,
                                                         @RequestBody Map<String, Object> body) {
-        return ResponseEntity.ok(ApiResponse.ok(usuarioService.update(id, body), "UsuÃ¡rio atualizado com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(usuarioService.update(id, body), "Usuário atualizado com sucesso!"));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {
         usuarioService.delete(id);
-        return ResponseEntity.ok(ApiResponse.ok(null, "UsuÃ¡rio excluÃ­do com sucesso!"));
+        return ResponseEntity.ok(ApiResponse.ok(null, "Usuário excluído com sucesso!"));
     }
 }

@@ -1,4 +1,4 @@
-ackage com.autoorion.service;
+﻿package com.autoorion.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +34,8 @@ public class PerfilAcessoService {
     }
 
     /**
-     * Retorna a lista de screenNames permitidos para um cÃ³digo de perfil.
-     * LÃª do banco de dados â€” substituiÃ§Ã£o da lÃ³gica hardcoded.
+     * Retorna a lista de screenNames permitidos para um código de perfil.
+     * Lê do banco de dados — substituição da lógica hardcoded.
      */
     public List<String> getScreensForPerfil(String codigoPerfil) {
         return repository.findByCodigo(codigoPerfil)

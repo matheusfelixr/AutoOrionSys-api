@@ -1,19 +1,19 @@
-ackage com.autoorion.exception;
+﻿package com.autoorion.exception;
 
 import org.springframework.http.HttpStatus;
 import lombok.Getter;
 
 /**
- * ExceÃ§Ã£o de regra de negÃ³cio.
- * LanÃ§ada pelos services quando uma regra Ã© violada.
- * Resulta em HTTP 422 (Unprocessable Entity) por padrÃ£o.
+ * Exceção de regra de negócio.
+ * Lançada pelos services quando uma regra é violada.
+ * Resulta em HTTP 422 (Unprocessable Entity) por padrão.
  */
 @Getter
 public class BusinessException extends RuntimeException {
 
     private final HttpStatus status;
     private final String code;
-    private final String field; // campo especÃ­fico que causou o erro (opcional)
+    private final String field; // campo específico que causou o erro (opcional)
 
     public BusinessException(String message) {
         super(message);
