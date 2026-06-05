@@ -1,4 +1,4 @@
-﻿package com.autoorion.dto;
+package com.autoorion.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: flexsys-backend
+    name: autoorion-api
 
   # ── MVC / Error Handling ────────────────────────────────────────────
   mvc:
@@ -17,7 +17,7 @@ spring:
 
   # ── Banco de dados ──────────────────────────────────────────────────
   datasource:
-    url: jdbc:h2:mem:flexsysdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:autooriondb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
@@ -50,9 +50,9 @@ server:
     max-http-form-post-size: 20971520  # 20MB para suportar base64 de fotos
 
 # ── JWT ─────────────────────────────────────────────────────────────
-flexsys:
+autoorion:
   jwt:
-    secret: ${JWT_SECRET:flexsys-jwt-secret-key-2024-muito-seguro-e-longo-para-hmac-sha256}
+    secret: ${JWT_SECRET:hcmVuuKomtBj8hncvS0aMOMEgdQ+3FRmBNe7jatlB7znO0x34SUWOIqtXKaM35X3LvnNBwdZ8wcK+B+qW1Q4bA==}
     expiration: 86400000  # 24 horas em ms
     refresh-expiration: 604800000  # 7 dias em ms
   cors:
@@ -61,7 +61,7 @@ flexsys:
 # ── Logging ─────────────────────────────────────────────────────────
 logging:
   level:
-    com.flexsys: DEBUG
+    com.autoorion: DEBUG
     org.springframework.security: INFO
 
 # ── SpringDoc / Swagger UI ───────────────────────────────────────────
@@ -76,7 +76,7 @@ springdoc:
     filter: true
     displayRequestDuration: true
   show-actuator: false
-  packages-to-scan: com.flexsys.controller
+  packages-to-scan: com.autoorion.controller
 
 # ── DevTools ────────────────────────────────────────────────────────
   devtools:
@@ -103,6 +103,6 @@ management:
 
 info:
   app:
-    name: FlexSys Backend
+    name: AutoOrion API
     version: 1.0.0
-    description: API REST do sistema FlexSys
+    description: API REST do sistema AutoOrion

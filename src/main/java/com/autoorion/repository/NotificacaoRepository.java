@@ -1,4 +1,4 @@
-﻿package com.autoorion.repository;
+package com.autoorion.repository;
 
 import com.autoorion.entity.Notificacao;
 import org.springframework.data.jpa.repository.JpaRepository;

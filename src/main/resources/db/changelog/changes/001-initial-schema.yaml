@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 001-initial-schema
-      author: flexsys
+      author: autoorion
       changes:
         # Tabela usuarios
         - createTable:

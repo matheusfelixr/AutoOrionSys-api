@@ -1,0 +1,145 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-initial-schema
+      author: autoorion
+      changes:
+        # Tabela usuarios
+        - createTable:
+            tableName: usuarios
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: nome, type: VARCHAR(150), constraints: {nullable: false}}
+              - column: {name: email, type: VARCHAR(200), constraints: {nullable: false, unique: true}}
+              - column: {name: senha, type: VARCHAR(255), constraints: {nullable: false}}
+              - column: {name: cargo, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: perfil, type: VARCHAR(30), constraints: {nullable: false}}
+              - column: {name: status, type: VARCHAR(20), constraints: {nullable: false}}
+              - column: {name: telefone, type: VARCHAR(30)}
+              - column: {name: data_cadastro, type: DATETIME}
+              - column: {name: ultimo_acesso, type: DATETIME}
+              - column: {name: avatar_url, type: TEXT}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela veiculos
+        - createTable:
+            tableName: veiculos
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: placa, type: VARCHAR(10), constraints: {nullable: false, unique: true}}
+              - column: {name: modelo, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: marca, type: VARCHAR(60), constraints: {nullable: false}}
+              - column: {name: ano_fabricacao, type: INT}
+              - column: {name: cor, type: VARCHAR(40)}
+              - column: {name: status, type: VARCHAR(30), constraints: {nullable: false}}
+              - column: {name: km, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: preco, type: FLOAT8}
+              - column: {name: cliente_nome, type: VARCHAR(120)}
+              - column: {name: responsavel_id, type: VARCHAR(36)}
+              - column: {name: responsavel_nome, type: VARCHAR(120)}
+              - column: {name: descricao, type: CLOB}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela perfis_acesso
+        - createTable:
+            tableName: perfis_acesso
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: codigo, type: VARCHAR(50), constraints: {nullable: false, unique: true}}
+              - column: {name: nome, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: descricao, type: CLOB}
+              - column: {name: telas_permitidas, type: CLOB}
+              - column: {name: total_usuarios, type: INT, defaultValueNumeric: 0}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela telas_sistema
+        - createTable:
+            tableName: telas_sistema
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: screen_name, type: VARCHAR(80), constraints: {nullable: false, unique: true}}
+              - column: {name: nome, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: descricao, type: CLOB}
+              - column: {name: menu_id, type: VARCHAR(36)}
+              - column: {name: parent_screen_name, type: VARCHAR(80)}
+              - column: {name: icone, type: VARCHAR(10)}
+              - column: {name: ordem, type: INT, defaultValueNumeric: 1}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela menus_grupos
+        - createTable:
+            tableName: menus_grupos
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: nome, type: VARCHAR(80), constraints: {nullable: false}}
+              - column: {name: icone, type: VARCHAR(10)}
+              - column: {name: ordem, type: INT, defaultValueNumeric: 1}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela notificacoes (schema atual — WebSocket)
+        - createTable:
+            tableName: notificacoes
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: usuario_id, type: VARCHAR(36), constraints: {nullable: false}}
+              - column: {name: titulo, type: VARCHAR(255), constraints: {nullable: false}}
+              - column: {name: mensagem, type: "VARCHAR(1000)", constraints: {nullable: false}}
+              - column: {name: tipo, type: VARCHAR(20), constraints: {nullable: false}, defaultValue: 'info'}
+              - column: {name: lida, type: BOOLEAN, defaultValueBoolean: false, constraints: {nullable: false}}
+              - column: {name: criado_em, type: TIMESTAMP, constraints: {nullable: false}}
+        # Tabela grupos_parametro
+        - createTable:
+            tableName: grupos_parametro
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: nome, type: VARCHAR(80), constraints: {nullable: false}}
+              - column: {name: descricao, type: CLOB}
+              - column: {name: ordem, type: INT, defaultValueNumeric: 1}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela parametros
+        - createTable:
+            tableName: parametros
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: nome, type: VARCHAR(80), constraints: {nullable: false, unique: true}}
+              - column: {name: descricao, type: CLOB}
+              - column: {name: grupo_id, type: VARCHAR(36), constraints: {nullable: false}}
+              - column: {name: valor, type: CLOB, constraints: {nullable: false}}
+              - column: {name: tipo, type: VARCHAR(20), constraints: {nullable: false}}
+              - column: {name: opcoes, type: CLOB}
+              - column: {name: ordem, type: INT, defaultValueNumeric: 1}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela fotos (para armazenar imagens no banco)
+        - createTable:
+            tableName: fotos
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: dados_base64, type: CLOB, constraints: {nullable: false}}
+              - column: {name: mime_type, type: VARCHAR(50), defaultValue: 'image/jpeg'}
+              - column: {name: nome_arquivo, type: VARCHAR(200)}
+              - column: {name: tamanho_bytes, type: BIGINT}
+              - column: {name: entidade_tipo, type: VARCHAR(50)}
+              - column: {name: entidade_id, type: VARCHAR(36)}
+              - column: {name: descricao, type: VARCHAR(500)}
+              - column: {name: etapa, type: VARCHAR(100)}
+              - column: {name: criado_por, type: VARCHAR(36)}
+              - column: {name: criado_em, type: DATETIME}
+              - column: {name: atualizado_em, type: DATETIME}
+              - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
+        # Tabela refresh_tokens
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column: {name: id, type: VARCHAR(36), constraints: {primaryKey: true, nullable: false}}
+              - column: {name: token, type: VARCHAR(255), constraints: {nullable: false, unique: true}}
+              - column: {name: usuario_id, type: VARCHAR(36), constraints: {nullable: false}}
+              - column: {name: expira_em, type: DATETIME, constraints: {nullable: false}}
+              - column: {name: criado_em, type: DATETIME}

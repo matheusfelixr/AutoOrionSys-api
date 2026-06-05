@@ -1,4 +1,4 @@
-﻿package com.autoorion.controller;
+package com.autoorion.controller;
 
 import com.autoorion.dto.ApiResponse;
 import com.autoorion.entity.GrupoParametro;

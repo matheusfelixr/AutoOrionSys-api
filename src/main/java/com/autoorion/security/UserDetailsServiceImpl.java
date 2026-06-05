@@ -1,4 +1,4 @@
-﻿package com.autoorion.security;
+package com.autoorion.security;
 
 import com.autoorion.entity.Usuario;
 import com.autoorion.repository.UsuarioRepository;

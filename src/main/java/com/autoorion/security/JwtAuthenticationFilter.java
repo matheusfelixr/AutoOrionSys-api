@@ -1,4 +1,4 @@
-﻿package com.autoorion.security;
+package com.autoorion.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

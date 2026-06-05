@@ -1,4 +1,4 @@
-﻿package com.autoorion.repository;
+package com.autoorion.repository;
 
 import com.autoorion.entity.Usuario;
 import org.springframework.data.domain.Page;

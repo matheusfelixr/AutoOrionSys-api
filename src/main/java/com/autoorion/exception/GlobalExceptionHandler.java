@@ -1,4 +1,4 @@
-﻿package com.autoorion.exception;
+package com.autoorion.exception;
 
 import com.autoorion.dto.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;

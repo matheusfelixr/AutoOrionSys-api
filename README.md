@@ -1,4 +1,4 @@
-﻿# 🔧 AutoOrionSys-api
+# 🔧 AutoOrionSys-api
 
 **Seu carro. Nossa missão.**
 
@@ -20,15 +20,15 @@ Sistema responsável por:
 
 ## 🚀 Executando
 
-`ash
+```bash
 mvn spring-boot:run
-`
+```
 
 O servidor inicia em http://localhost:8080.
 
 ## 🔑 Credenciais Padrão
 
-Todos os usuários seed têm a senha utoorion123.
+Todos os usuários seed têm a senha autoorion123.
 
 | Nome           | Email                              | Perfil       |
 |----------------|------------------------------------|--------------|
@@ -73,11 +73,11 @@ URL: http://localhost:8080/h2-console
 
 ### Exemplo de Login
 
-`ash
+```bash
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@autoorion.com.br","senha":"autoorion123"}'
-`
+```
 
 Use o token retornado como Authorization: Bearer <token> em requisições autenticadas.
 
@@ -85,31 +85,31 @@ Use o token retornado como Authorization: Bearer <token> em requisições autent
 
 Ative o perfil prod:
 
-`ash
+```bash
 mvn spring-boot:run -Dspring-boot.run.profiles=prod
-`
+```
 
 Defina variáveis de ambiente do banco:
 
-`ash
+```bash
 export DB_USERNAME=autoorion
 export DB_PASSWORD=autoorion123
-`
+```
 
 Ou passe diretamente:
 
-`ash
+```bash
 mvn spring-boot:run -Dspring-boot.run.profiles=prod \
   -Dspring-boot.run.jvmArguments="-DDB_USERNAME=autoorion -DDB_PASSWORD=suasenha"
-`
+```
 
 O perfil de produção conecta a jdbc:postgresql://localhost:5432/autooriondb. Crie o banco antes de executar:
 
-`sql
+```sql
 CREATE DATABASE autooriondb;
 CREATE USER autoorion WITH PASSWORD 'autoorion123';
 GRANT ALL PRIVILEGES ON DATABASE autooriondb TO autoorion;
-`
+```
 
 ## 🎨 Identidade Visual AutoOrion
 

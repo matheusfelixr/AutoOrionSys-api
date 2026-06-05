@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,13 +12,16 @@
   </parent>
 
   <groupId>com.autoorion</groupId>
-  <artifactId>autoorion-backend</artifactId>
+  <artifactId>autoorion-api</artifactId>
   <version>1.0.0</version>
-  <name>autoorion Backend</name>
+  <name>autoorion Api</name>
   <description>Backend REST API para o sistema autoorion</description>
 
   <properties>
     <java.version>21</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     <jjwt.version>0.12.6</jjwt.version>
   </properties>
 
@@ -110,13 +113,13 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- Liquibase â€” gerenciamento de schema do banco -->
+    <!-- Liquibase - gerenciamento de schema do banco -->
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
     </dependency>
 
-    <!-- Actuator â€” health checks e mÃ©tricas -->
+    <!-- Actuator - health checks e metricas -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>

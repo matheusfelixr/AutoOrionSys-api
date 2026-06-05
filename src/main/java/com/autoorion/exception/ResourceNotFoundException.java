@@ -1,4 +1,4 @@
-﻿package com.autoorion.exception;
+package com.autoorion.exception;
 
 import org.springframework.http.HttpStatus;
 
