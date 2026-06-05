@@ -1,7 +1,7 @@
-databaseChangeLog:
+﻿databaseChangeLog:
   - changeSet:
       id: 001-initial-schema
-      author: flexsys
+      author: autoorion
       changes:
         # Tabela usuarios
         - createTable:
@@ -80,7 +80,7 @@ databaseChangeLog:
               - column: {name: criado_em, type: DATETIME}
               - column: {name: atualizado_em, type: DATETIME}
               - column: {name: ativo, type: BOOLEAN, defaultValueBoolean: true}
-        # Tabela notificacoes (schema atual — WebSocket)
+        # Tabela notificacoes (schema atual â€” WebSocket)
         - createTable:
             tableName: notificacoes
             columns:

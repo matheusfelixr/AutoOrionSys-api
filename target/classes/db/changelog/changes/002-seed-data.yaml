@@ -1,5 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 002-seed-data-placeholder
-      author: flexsys
-      changes: []

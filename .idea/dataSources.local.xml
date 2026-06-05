@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-261.25134.95">
-    <data-source name="flexsysdb@postgres" uuid="29f51a2b-07cb-431b-a50d-5059557238d2">
+    <data-source name="autooriondb@postgres" uuid="29f51a2b-07cb-431b-a50d-5059557238d2">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
-      <user-name>flexsys</user-name>
+      <user-name>autoorion</user-name>
       <schema-mapping />
     </data-source>
-    <data-source name="flexsysdb" uuid="a4418e57-3584-416a-8368-b5f9c4fa2a8e">
+    <data-source name="autooriondb" uuid="a4418e57-3584-416a-8368-b5f9c4fa2a8e">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="H2" />
       <user-name>sa</user-name>
       <schema-mapping />

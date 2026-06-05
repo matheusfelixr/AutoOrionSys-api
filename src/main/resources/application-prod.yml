@@ -1,9 +1,9 @@
-spring:
+﻿spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:flexsysdb}
+    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:autooriondb}
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME:flexsys}
-    password: ${DB_PASSWORD:flexsys123}
+    username: ${DB_USERNAME:autoorion}
+    password: ${DB_PASSWORD:autoorion123}
 
   jpa:
     hibernate:
@@ -13,7 +13,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-  # Liquibase HABILITADO em produção
+  # Liquibase HABILITADO em produÃ§Ã£o
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     enabled: true

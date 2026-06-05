@@ -1,0 +1,57 @@
+﻿package com.autoorion.controller;
+
+import com.autoorion.dto.ApiResponse;
+import com.autoorion.dto.LoginRequest;
+import com.autoorion.dto.LoginResponse;
+import com.autoorion.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@Slf4j
+@Tag(name = "AutenticaÃ§Ã£o", description = "Endpoints de login e gestÃ£o de sessÃ£o")
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/login")
+    @Operation(
+        summary = "Realizar login",
+        description = """
+            Autentica o usuÃ¡rio e retorna um token JWT vÃ¡lido por 24 horas.
+            O token deve ser enviado no header `Authorization: Bearer {token}` em todas as demais requisiÃ§Ãµes.
+            """,
+        requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(examples = @ExampleObject(
+                name = "Login Admin",
+                value = """
+                    {
+                      "email": "ana.souza@autoorion.com.br",
+                      "senha": "autoorion123"
+                    }
+                    """
+            ))
+        )
+    )
+    @ApiResponses({
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Login realizado com sucesso"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "E-mail ou senha invÃ¡lidos"),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "UsuÃ¡rio inativo"),
+    })
+    @SecurityRequirements  // Login nÃ£o precisa de token
+    public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse response = authService.login(request);
+        return ResponseEntity.ok(ApiResponse.ok(response, "Login realizado com sucesso!"));
+    }
+}
