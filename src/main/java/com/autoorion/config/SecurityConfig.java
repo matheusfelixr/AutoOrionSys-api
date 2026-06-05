@@ -1,4 +1,4 @@
-﻿package com.autoorion.config;
+﻿ackage com.autoorion.config;
 
 import com.autoorion.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

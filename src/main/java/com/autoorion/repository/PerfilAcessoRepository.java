@@ -1,4 +1,4 @@
-﻿package com.autoorion.repository;
+﻿ackage com.autoorion.repository;
 import com.autoorion.entity.PerfilAcesso;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

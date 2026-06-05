@@ -1,4 +1,4 @@
-﻿package com.autoorion.config;
+﻿ackage com.autoorion.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * ConfiguraÃ§Ã£o do Swagger UI / OpenAPI 3.
+ * Configuraçoes do Swagger UI / OpenAPI 3.
  *
  * Acesso: http://localhost:8080/swagger-ui.html
  * JSON:   http://localhost:8080/v3/api-docs

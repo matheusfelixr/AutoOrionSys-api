@@ -1,0 +1,12 @@
+﻿databaseChangeLog:
+  - changeSet:
+      id: 003-notificacoes-index
+      author: autoorion
+      changes:
+        - createIndex:
+            indexName: idx_notif_usuario_id
+            tableName: notificacoes
+            columns:
+              - column:
+                  name: usuario_id
+      onFail: MARK_RAN

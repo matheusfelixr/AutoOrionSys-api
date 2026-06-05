@@ -1,4 +1,4 @@
-﻿package com.autoorion.service;
+﻿ackage com.autoorion.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
