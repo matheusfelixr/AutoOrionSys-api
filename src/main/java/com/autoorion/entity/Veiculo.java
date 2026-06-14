@@ -38,6 +38,10 @@ public class Veiculo extends Auditable {
     @Column(name = "ano_fabricacao")
     private Integer anoFabricacao;
 
+    /** Ano do modelo (pode diferir do ano de fabricação) */
+    @Column(name = "ano_modelo")
+    private Integer anoModelo;
+
     @Column(length = 40)
     private String cor;
 
@@ -65,12 +69,6 @@ public class Veiculo extends Auditable {
     @Column(nullable = false)
     @Builder.Default
     private Boolean baixado = false;
-
-    @Column(name = "responsavel_id", length = 36)
-    private String responsavelId;
-
-    @Column(name = "responsavel_nome", length = 120)
-    private String responsavelNome;
 
     @Column(columnDefinition = "TEXT")
     private String descricao;

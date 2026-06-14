@@ -29,7 +29,8 @@ public class DataInitializer {
             ParametroRepository parametros,
             PerfilAcessoRepository perfilAcessoRepo,
             VeiculoRepository veiculos,
-            MarcaRepository marcas) {
+            MarcaRepository marcas,
+            CorRepository cores) {
         return args -> {
             if (usuarios.count() > 0) return;
             log.info("Inicializando dados de demonstração...");
@@ -95,6 +96,9 @@ public class DataInitializer {
             telas.save(TelaSistema.builder().screenName("marcas").nome("Cadastro de Marcas")
                     .descricao("Cadastro de marcas de veículos").menuId(mg2.getId())
                     .parentScreenName("veiculos-group").ordem(2).build());
+            telas.save(TelaSistema.builder().screenName("cores").nome("Cadastro de Cores")
+                    .descricao("Cadastro de cores de veículos").menuId(mg2.getId())
+                    .parentScreenName("veiculos-group").ordem(3).build());
             telas.save(TelaSistema.builder().screenName("usuarios-group").nome("Usuários")
                     .descricao("Módulo de usuários (agrupador)").menuId(mg2.getId())
                     .icone("👥").ordem(2).build());
@@ -179,8 +183,8 @@ public class DataInitializer {
                     .codigo("admin")
                     .nome("Administrador")
                     .descricao("Acesso total ao sistema")
-                    .telasPermitidas("[\"home\",\"veiculos\",\"marcas\",\"usuarios\",\"perfis\",\"perfil\",\"config.telas\",\"config.menus\",\"notificacoes\",\"notificacoes.admin\",\"parametros\",\"parametros.grupos\"]")
-                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"marcas\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"usuarios\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"perfis\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"parametros\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"notificacoes.admin\":[\"ver\",\"criar\",\"excluir\"]}")
+                    .telasPermitidas("[\"home\",\"veiculos\",\"marcas\",\"cores\",\"usuarios\",\"perfis\",\"perfil\",\"config.telas\",\"config.menus\",\"notificacoes\",\"notificacoes.admin\",\"parametros\",\"parametros.grupos\"]")
+                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"marcas\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"cores\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"usuarios\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"perfis\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"parametros\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"notificacoes.admin\":[\"ver\",\"criar\",\"excluir\"]}")
                     .totalUsuarios(2)
                     .build());
 
@@ -188,8 +192,8 @@ public class DataInitializer {
                     .codigo("gerente")
                     .nome("Gerente")
                     .descricao("Gerencia recursos e equipes")
-                    .telasPermitidas("[\"home\",\"veiculos\",\"marcas\",\"usuarios\",\"perfis\",\"perfil\",\"notificacoes\",\"notificacoes.admin\",\"parametros\"]")
-                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"marcas\":[\"ver\",\"criar\",\"editar\"],\"usuarios\":[\"ver\",\"editar\"],\"perfis\":[\"ver\"],\"parametros\":[\"ver\"],\"notificacoes.admin\":[\"ver\",\"criar\"]}")
+                    .telasPermitidas("[\"home\",\"veiculos\",\"marcas\",\"cores\",\"usuarios\",\"perfis\",\"perfil\",\"notificacoes\",\"notificacoes.admin\",\"parametros\"]")
+                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\",\"excluir\"],\"marcas\":[\"ver\",\"criar\",\"editar\"],\"cores\":[\"ver\",\"criar\",\"editar\"],\"usuarios\":[\"ver\",\"editar\"],\"perfis\":[\"ver\"],\"parametros\":[\"ver\"],\"notificacoes.admin\":[\"ver\",\"criar\"]}")
                     .totalUsuarios(2)
                     .build());
 
@@ -198,7 +202,7 @@ public class DataInitializer {
                     .nome("Técnico")
                     .descricao("Acesso operacional")
                     .telasPermitidas("[\"home\",\"veiculos\",\"perfil\",\"notificacoes\"]")
-                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\"],\"marcas\":[\"ver\"]}")
+                    .permissoes("{\"veiculos\":[\"ver\",\"criar\",\"editar\"],\"marcas\":[\"ver\"],\"cores\":[\"ver\"]}")
                     .totalUsuarios(1)
                     .build());
 
@@ -207,7 +211,7 @@ public class DataInitializer {
                     .nome("Visualizador")
                     .descricao("Somente visualização")
                     .telasPermitidas("[\"home\",\"veiculos\",\"perfil\",\"notificacoes\"]")
-                    .permissoes("{\"veiculos\":[\"ver\"],\"marcas\":[\"ver\"]}")
+                    .permissoes("{\"veiculos\":[\"ver\"],\"marcas\":[\"ver\"],\"cores\":[\"ver\"]}")
                     .totalUsuarios(1)
                     .build());
 
@@ -215,7 +219,7 @@ public class DataInitializer {
             }
 
             // ── Marcas ───────────────────────────────────────────────────────
-            String[] nomesMArcas = {
+            String[] nomesMarcas = {
                 "Acura","Alfa Romeo","Aston Martin","Audi","Bentley","BMW","Bugatti",
                 "BYD","Cadillac","Chery","Chevrolet","Chrysler","Citroën","Dodge",
                 "Ferrari","Fiat","Ford","Genesis","GMC","Honda","Hyundai","Infiniti",
@@ -224,44 +228,49 @@ public class DataInitializer {
                 "Nissan","Peugeot","Pontiac","Porsche","Ram","Renault","Rolls-Royce",
                 "Subaru","Suzuki","Tesla","Toyota","Troller","Volkswagen","Volvo"
             };
-            for (String nome : nomesMArcas) {
+            for (String nome : nomesMarcas) {
                 marcas.save(com.autoorion.entity.Marca.builder().nome(nome).build());
             }
             log.info("✅ Marcas inicializadas: {} marcas", marcas.count());
 
-            // ── Veículos demo ─────────────────────────────────────────────────
-            var adminRef = usuarios.findByEmail("matheus.felix@autoorion.com.br").orElse(null);
-            String adminId   = adminRef != null ? adminRef.getId()   : null;
-            String adminNome = adminRef != null ? adminRef.getNome() : "Matheus Felix";
+            // ── Cores ────────────────────────────────────────────────────────
+            String[] nomesCores = {
+                "Amarelo","Azul","Azul Celeste","Azul Escuro","Azul Marinho",
+                "Bege","Bordô","Branco","Branco Pérola","Bronze",
+                "Cinza","Cinza Escuro","Cobre","Dourado","Grafite",
+                "Laranja","Laranja Metálico","Marrom","Prata","Preto",
+                "Rosa","Roxo","Verde","Verde Escuro","Verde Militar",
+                "Vermelho","Vermelho Escuro","Vinho"
+            };
+            for (String nome : nomesCores) {
+                cores.save(com.autoorion.entity.Cor.builder().nome(nome).build());
+            }
+            log.info("✅ Cores inicializadas: {} cores", cores.count());
 
+            // ── Veículos demo ────────────────────────────────────────────────
             veiculos.save(Veiculo.builder().placa("ABC-1234").modelo("Civic").marca("Honda")
-                    .anoFabricacao(2019).cor("Prata").km(45000L)
+                    .anoFabricacao(2019).anoModelo(2020).cor("Prata").km(45000L)
                     .chassi("1HGCM82633A004352").renavam("12345678901")
-                    .responsavelId(adminId).responsavelNome(adminNome)
                     .descricao("Veículo em ótimo estado, único dono.").build());
 
             veiculos.save(Veiculo.builder().placa("DEF-5678").modelo("Corolla").marca("Toyota")
-                    .anoFabricacao(2021).cor("Preto").km(22000L)
+                    .anoFabricacao(2021).anoModelo(2021).cor("Preto").km(22000L)
                     .chassi("JT2BF22K1W0083588").renavam("98765432100")
-                    .responsavelId(adminId).responsavelNome(adminNome)
                     .descricao("Motor em excelente estado.").podeVenderMotor(true).build());
 
             veiculos.save(Veiculo.builder().placa("GHI-9012").modelo("HB20").marca("Hyundai")
-                    .anoFabricacao(2020).cor("Branco").km(61000L)
-                    .chassi("9BWZZZ377VT004251").renavam("11122233344")
-                    .responsavelId(adminId).responsavelNome(adminNome).build());
+                    .anoFabricacao(2020).anoModelo(2020).cor("Branco").km(61000L)
+                    .chassi("9BWZZZ377VT004251").renavam("11122233344").build());
 
             veiculos.save(Veiculo.builder().placa("JKL-3456").modelo("Onix").marca("Chevrolet")
-                    .anoFabricacao(2022).cor("Vermelho").km(18000L)
+                    .anoFabricacao(2022).anoModelo(2022).cor("Vermelho").km(18000L)
                     .chassi("9BWZZZ377VT004252").renavam("55566677788")
-                    .responsavelId(adminId).responsavelNome(adminNome)
                     .baixado(true).descricao("Veículo baixado para desmanche.").build());
 
             veiculos.save(Veiculo.builder().placa("MNO-7890").modelo("Gol").marca("Volkswagen")
-                    .anoFabricacao(2018).cor("Cinza").km(92000L)
+                    .anoFabricacao(2018).anoModelo(2019).cor("Cinza").km(92000L)
                     .chassi("9BWZZZ377VT004253").renavam("99988877766")
-                    .podeVenderMotor(true).numeroMotor("EA111-ABC123")
-                    .responsavelId(adminId).responsavelNome(adminNome).build());
+                    .podeVenderMotor(true).numeroMotor("EA111-ABC123").build());
 
             log.info("Dados inicializados: {} usuários, {} menus, {} telas, {} grupos, {} parâmetros, {} veículos",
                     usuarios.count(), menuGrupos.count(),
