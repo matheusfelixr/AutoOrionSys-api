@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -13,6 +14,8 @@ public class LoginResponse {
     private String token;
     private String refreshToken;
     private List<String> screens;
+    /** Permissões granulares por tela. Ex: {"veiculos":["ver","criar","editar","excluir"]} */
+    private Map<String, List<String>> permissoes;
 
     @Data
     @Builder

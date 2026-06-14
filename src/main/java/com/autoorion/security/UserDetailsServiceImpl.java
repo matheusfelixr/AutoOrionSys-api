@@ -20,10 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Usuario usuario = usuarioRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + userId));
 
-        return User.builder()
-                .username(usuario.getId())
-                .password(usuario.getSenha())
-                .authorities(List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getPerfil().name().toUpperCase())))
-                .build();
+        var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getPerfil().name().toUpperCase()));
+        return new CustomUserDetails(usuario.getId(), usuario.getSenha(), usuario.getNome(), authorities);
     }
 }

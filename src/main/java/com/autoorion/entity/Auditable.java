@@ -3,7 +3,9 @@ package com.autoorion.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -28,6 +30,14 @@ public abstract class Auditable {
     @LastModifiedDate
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
+
+    @CreatedBy
+    @Column(name = "criado_por", length = 120, updatable = false)
+    private String criadoPor;
+
+    @LastModifiedBy
+    @Column(name = "atualizado_por", length = 120)
+    private String atualizadoPor;
 
     /** Soft delete — false = registro excluído logicamente */
     @Column(nullable = false)

@@ -3,6 +3,7 @@ package com.autoorion.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,18 @@ public class PermissionsService {
     /** Mantém compatibilidade com código legado que passa enum */
     public List<String> getPermissions(com.autoorion.entity.Usuario.PerfilUsuario perfil) {
         return getPermissions((Object) perfil.name());
+    }
+
+    /**
+     * Retorna as permissões granulares por tela para um perfil.
+     * Ex: {"veiculos":["ver","criar","editar","excluir"],"marcas":["ver"]}
+     */
+    public Map<String, List<String>> getActionPermissions(Object perfil) {
+        String codigoPerfil = perfil != null ? perfil.toString() : "visualizador";
+        return perfilAcessoService.getActionsForPerfil(codigoPerfil);
+    }
+
+    public Map<String, List<String>> getActionPermissions(com.autoorion.entity.Usuario.PerfilUsuario perfil) {
+        return getActionPermissions((Object) perfil.name());
     }
 }

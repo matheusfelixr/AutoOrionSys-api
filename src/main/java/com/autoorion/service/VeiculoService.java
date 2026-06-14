@@ -19,13 +19,12 @@ public class VeiculoService {
     private final UsuarioRepository usuarioRepository;
     private final NotificacaoService notificacaoService;
 
-    public Page<Veiculo> findAll(String busca, String status, int page, int size, String sortBy, String sortDir) {
+    public Page<Veiculo> findAll(String busca, int page, int size, String sortBy, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase("desc")
                 ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page, size, sort);
         return repository.findFiltered(
             busca.isBlank() ? null : busca,
-            status.isBlank() ? null : status,
             pageable
         );
     }

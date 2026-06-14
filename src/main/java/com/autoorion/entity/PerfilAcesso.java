@@ -29,11 +29,19 @@ public class PerfilAcesso extends Auditable {
 
     /**
      * Lista de screenNames permitidos — armazenada como JSON no banco.
-     * Ex: ["dashboard","usuarios","obras"]
-     * Usada pelo frontend para controlar quais telas o usuário vê.
+     * Ex: ["veiculos","usuarios","perfis"]
+     * Usada pelo frontend para controlar quais telas o usuário vê no sidebar.
      */
     @Column(name = "telas_permitidas", columnDefinition = "TEXT")
     private String telasPermitidas; // JSON array as string
+
+    /**
+     * Permissões granulares por tela — armazenadas como JSON no banco.
+     * Ex: {"veiculos":["ver","criar","editar","excluir"],"marcas":["ver"]}
+     * Usada pelo frontend para controlar quais ações o usuário pode executar.
+     */
+    @Column(name = "permissoes", columnDefinition = "TEXT")
+    private String permissoes; // JSON object as string
 
     private Integer totalUsuarios = 0;
 }

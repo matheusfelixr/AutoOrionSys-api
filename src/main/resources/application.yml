@@ -56,7 +56,7 @@ autoorion:
     expiration: 86400000  # 24 horas em ms
     refresh-expiration: 604800000  # 7 dias em ms
   cors:
-    allowed-origins: "http://localhost:4200,http://localhost:4201"
+    allowed-origins: "http://localhost:4200,http://localhost:4201,http://localhost:9000"
 
 # ── Logging ─────────────────────────────────────────────────────────
 logging:

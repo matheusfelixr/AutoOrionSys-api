@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -59,6 +60,16 @@ public class PerfilAcessoService {
         repository.deleteById(id);
     }
 
+    /**
+     * Retorna as permissões granulares por tela para um código de perfil.
+     * Ex: {"veiculos":["ver","criar","editar","excluir"],"marcas":["ver"]}
+     */
+    public Map<String, List<String>> getActionsForPerfil(String codigoPerfil) {
+        return repository.findByCodigo(codigoPerfil)
+                .map(p -> parseActions(p.getPermissoes()))
+                .orElse(Map.of());
+    }
+
     private List<String> parseScreens(String json) {
         if (json == null || json.isBlank()) return List.of();
         try {
@@ -66,6 +77,16 @@ public class PerfilAcessoService {
         } catch (Exception e) {
             log.warn("[PerfilAcessoService] Erro ao parsear telas: {}", json);
             return List.of();
+        }
+    }
+
+    private Map<String, List<String>> parseActions(String json) {
+        if (json == null || json.isBlank()) return Map.of();
+        try {
+            return objectMapper.readValue(json, new TypeReference<Map<String, List<String>>>() {});
+        } catch (Exception e) {
+            log.warn("[PerfilAcessoService] Erro ao parsear permissoes: {}", json);
+            return Map.of();
         }
     }
 }

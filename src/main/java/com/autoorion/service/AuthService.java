@@ -42,11 +42,13 @@ public class AuthService {
         String token      = tokenProvider.generateToken(usuario.getId(), usuario.getEmail(), usuario.getPerfil().name());
         var refreshToken  = refreshTokenService.createRefreshToken(usuario.getId());
         var screens       = permissionsService.getPermissions(usuario.getPerfil());
+        var permissoes    = permissionsService.getActionPermissions(usuario.getPerfil());
 
         return LoginResponse.builder()
                 .token(token)
                 .refreshToken(refreshToken.getToken())
                 .screens(screens)
+                .permissoes(permissoes)
                 .user(LoginResponse.UserInfo.builder()
                         .id(usuario.getId())
                         .nome(usuario.getNome())

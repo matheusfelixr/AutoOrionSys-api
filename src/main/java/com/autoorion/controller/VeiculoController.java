@@ -24,12 +24,11 @@ public class VeiculoController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Veiculo>>> getAll(
             @RequestParam(defaultValue = "") String busca,
-            @RequestParam(defaultValue = "") String status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "modelo") String sortBy,
             @RequestParam(defaultValue = "asc") String sortDir) {
-        var result = veiculoService.findAll(busca, status, page, size, sortBy, sortDir);
+        var result = veiculoService.findAll(busca, page, size, sortBy, sortDir);
         log.info("[Veículos] GET lista: page={}, size={}, total={}", page, size, result.getTotalElements());
         return ResponseEntity.ok(ApiResponse.page(result));
     }
