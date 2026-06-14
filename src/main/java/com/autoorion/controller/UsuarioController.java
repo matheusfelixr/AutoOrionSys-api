@@ -46,9 +46,11 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}/permissions")
-    public ResponseEntity<ApiResponse<List<String>>> getPermissions(@PathVariable String id) {
+    public ResponseEntity<ApiResponse<Map<String, Object>>> getPermissions(@PathVariable String id) {
         var usuario = usuarioService.findById(id);
-        return ResponseEntity.ok(ApiResponse.ok(permissionsService.getPermissions(usuario.getPerfil())));
+        var screens   = permissionsService.getPermissions(usuario.getPerfil());
+        var permissoes = permissionsService.getActionPermissions(usuario.getPerfil());
+        return ResponseEntity.ok(ApiResponse.ok(Map.of("screens", screens, "permissoes", permissoes)));
     }
 
     @PostMapping
